@@ -48,7 +48,8 @@
                 @endif
 
                 <x-button class="ml-3">
-                    {{ __('Log in') }}
+                    {{-- {{ __('Log in') }} --}}
+                    {{ $count }}
                 </x-button>
             </div>
         </form>
