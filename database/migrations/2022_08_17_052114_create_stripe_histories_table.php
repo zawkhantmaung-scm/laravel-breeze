@@ -18,8 +18,10 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
             $table->text('url');
-            $table->boolean('status')->comment('0: pending, 1: complete'); // 0: pending, 1: complete
+            $table->text('token');
+            $table->string('plink');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
