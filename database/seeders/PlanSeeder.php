@@ -19,7 +19,7 @@ class PlanSeeder extends Seeder
             'name' => 'Gold',
         ]);
         $goldPrice = $stripe->prices->create([
-            'unit_amount' => 100,
+            'unit_amount' => 10000,
             'currency' => 'sgd',
             'recurring' => ['interval' => 'month'],
             'product' => $goldProduct->id,
@@ -37,7 +37,7 @@ class PlanSeeder extends Seeder
             'name' => 'Platinum',
         ]);
         $platinumPrice = $stripe->prices->create([
-            'unit_amount' => 300,
+            'unit_amount' => 30000,
             'currency' => 'sgd',
             'recurring' => ['interval' => 'month'],
             'product' => $platinumProduct->id,
@@ -55,7 +55,7 @@ class PlanSeeder extends Seeder
             'name' => 'Diamond',
         ]);
         $diamondPrice = $stripe->prices->create([
-            'unit_amount' => 500,
+            'unit_amount' => 50000,
             'currency' => 'sgd',
             'recurring' => ['interval' => 'month'],
             'product' => $diamondProduct->id,
