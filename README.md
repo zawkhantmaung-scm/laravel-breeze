@@ -1,7 +1,8 @@
 ### Laravel-Breeze
 
+#### Installaion
 ````
-composer install && php artisan migrate && php artisan serve
+composer install && php artisan migrate:fresh --seed && php artisan serve
 npm i && npm run dev
 ````
 
