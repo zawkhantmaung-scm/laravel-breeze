@@ -19,10 +19,6 @@ class ElementController extends Controller
     public function payment(PlanRequest $request)
     {
         $plan = Plan::find($request->type);
-        $orderExist = Order::where('user_id', auth()->id())->where('plan_id', $plan->id)->exists();
-        if ($orderExist) {
-            return to_route('dashboard');
-        }
         $data = StripeHistory::where('user_id', auth()->id())->where('plan_id', $plan->id)->first();
         if (!$data) {
             $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
