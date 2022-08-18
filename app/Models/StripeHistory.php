@@ -21,5 +21,6 @@ class StripeHistory extends Model
         'url',
         'token',
         'plink',
+        'client_secret',
     ];
 }

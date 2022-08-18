@@ -17,9 +17,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('plan_id')->constrained('plans')->onDelete('cascade');
-            $table->text('url');
+            $table->text('url')->nullable();
             $table->text('token');
             $table->string('plink');
+            $table->string('client_secret')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
