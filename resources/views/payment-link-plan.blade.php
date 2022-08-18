@@ -1,6 +1,15 @@
 <div class="user-list-sec container-lg px-3 mt-5">
     <div class="col-sm-12 col-lg-10 m-auto">
         <h3 class="text-center text-primary text-[24px] fw-bold">Payment Link Plan</h3>
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form action="{{ route('payment.link.payment') }}" method="POST" class="p-3">
         @csrf
         <div class="card border-white p-lg-5 p-4 mt-5 ">

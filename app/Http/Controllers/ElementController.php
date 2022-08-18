@@ -45,19 +45,20 @@ class ElementController extends Controller
         $payment = json_encode([
             'clientSecret' => $data->client_secret,
             'clientPublic' => env('STRIPE_PUBLIC_KEY'),
-            'url' => route('element.success', ['token' => $data->token ?? $token]),
+            'url' => route('element.verify', ['token' => $data->token ?? $token]),
         ]);
         return view('checkout', compact('payment'));
     }
 
-    public function success(Request $request)
+    public function verify(Request $request)
     {
         $data = StripeHistory::where('user_id', auth()->id())
             ->where('token', $request->token)
             ->where('plink', $request->payment_intent)
             ->first();
         if (!$data) {
-            return view('fail');
+            session()->flash('element_fail', 'Fail Stripe Elements method!');
+            return to_route('element.fail');
         }
         $payment = [
             'user_id' => $data->user_id,
@@ -67,6 +68,23 @@ class ElementController extends Controller
         ];
         Order::create($payment);
         StripeHistory::destroy($data->id);
+        session()->flash('element_success', 'Success with Stripe Elements method!');
+        return to_route('element.success');
+    }
+
+    public function success()
+    {
+        if ($elementSuccess = session()->get('element_success')) {
+            return view('message', ['message' => $elementSuccess]);
+        }
+        return to_route('dashboard');
+    }
+
+    public function fail()
+    {
+        if ($elementFail = session()->get('element_fail')) {
+            return view('message', ['message' => $elementFail]);
+        }
         return to_route('dashboard');
     }
 }
